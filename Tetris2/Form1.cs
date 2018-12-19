@@ -16,6 +16,10 @@ namespace Tetris2
         Pen gridPen = new Pen(Color.Black);
         SolidBrush tBrush = new SolidBrush(Color.Red);
 
+        //is restored only when a new piece is placed
+        Point startPosition = new Point(4, 0);
+        int pos = 0;
+
         PointF[,] squareOrigin = new PointF[10, 18];
         bool[,] squareEmpty = new bool[10, 18];
 
@@ -33,10 +37,10 @@ namespace Tetris2
             //Grid for testing purposes only
             for (int i = 50; i <= 260; i += 21)
             {
-                grid.DrawLine(gridPen, i, 50, i, 407);
+                grid.DrawLine(gridPen, i, 50, i, 428);
             }
 
-            for (int i = 50; i <= 410; i += 21)
+            for (int i = 50; i <= 428; i += 21)
             {
                 grid.DrawLine(gridPen, 50, i, 260, i);
             }
@@ -54,9 +58,11 @@ namespace Tetris2
                 }
             }
 
-            //* works
+            TShape(squareOrigin[startPosition.X, startPosition.Y], pos);
+
+            /* works
             //this will probably change to a shape method
-            TShape(squareOrigin[5,0], 1);
+            TShape(squareOrigin[5, 0], 1);
             TShape(squareOrigin[6, 4], 2);
             TShape(squareOrigin[7, 12], 3);
             TShape(squareOrigin[3, 4], 4);
@@ -80,30 +86,54 @@ namespace Tetris2
         {
             switch (position)
             {
-                case 1:
+                case 0:
                     grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
                     grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
                     grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
                     grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
+                    break;
+                case 1:
+                    grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
+                    grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                    grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
+                    grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
                     break;
                 case 2:
                     grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
                     grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
                     grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
-                    grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
+                    grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
                     break;
                 case 3:
                     grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
                     grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
                     grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
-                    grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
-                    break;
-                case 4:
-                    grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
-                    grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
                     grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
-                    grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
                     break;
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                startPosition.Y++;
+                TShape(squareOrigin[startPosition.X, startPosition.Y], pos);
+            }
+            else if (e.KeyCode == Keys.Left)
+            {
+                startPosition.X--;
+                TShape(squareOrigin[startPosition.X, startPosition.Y], pos);
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                startPosition.X++;
+                TShape(squareOrigin[startPosition.X, startPosition.Y], pos);
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                pos = (pos + 1) % 4;
+                TShape(squareOrigin[startPosition.X, startPosition.Y], pos);
             }
         }
     }
