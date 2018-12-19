@@ -137,6 +137,8 @@ namespace Tetris2
                     break;
                 case 'I':
                     break;
+                case 'J':
+                    break;
             }
         }
 
