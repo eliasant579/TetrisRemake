@@ -16,11 +16,14 @@ namespace Tetris2
         Pen gridPen = new Pen(Color.Black);
         SolidBrush tBrush = new SolidBrush(Color.Red);
 
-        //is restored only when a new piece is placed
+        //this stuff is restored only when a new piece is placed
         Point startPosition = new Point(4, 0);
         int pos = 0;
 
+        //once only
         PointF[,] squareOrigin = new PointF[10, 18];
+
+        //not sure if this sould be bigger by one on each side, it might be easier to check collisions
         bool[,] squareEmpty = new bool[10, 18];
 
         public Form1()
@@ -76,6 +79,7 @@ namespace Tetris2
             TestGrid();
             if (shape == 't')
             {
+                //first check for collisions
                 switch (position)
                 {
                     case 0:
