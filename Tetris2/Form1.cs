@@ -70,7 +70,7 @@ namespace Tetris2
             else if (e.KeyCode == Keys.Up)
             {
                 pos = (pos + 1) % 4;
-                Shape(squareOrigin[startPosition.X, startPosition.Y], 'S', pos);
+                Shape(squareOrigin[startPosition.X, startPosition.Y], 'T', pos);
             }
         }
 
@@ -82,33 +82,33 @@ namespace Tetris2
                 //first check for collisions
 
                 case 'T':
-                switch (position)
-                {
-                    case 0:
-                        grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
-                        break;
-                    case 1:
-                        grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
-                        break;
-                    case 2:
-                        grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
-                        break;
-                    case 3:
-                        grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
-                        grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
-                        break;
-                }
+                    switch (position)
+                    {
+                        case 0:
+                            grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
+                            break;
+                        case 1:
+                            grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
+                            break;
+                        case 2:
+                            grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
+                            break;
+                        case 3:
+                            grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
+                            break;
+                    }
                     break;
                 case 'S':
                     switch (position)
@@ -132,12 +132,64 @@ namespace Tetris2
                     }
                     break;
                 case 'Z':
-                    break;
-                case 'L':
+                    switch (position)
+                    {
+                        case 0:
+                            grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X + 21, origin.Y + 21, 20, 20);
+                            break;
+                        case 1:
+                            grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X - 21, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X - 21, origin.Y + 21, 20, 20);
+                            break;
+                        case 2:
+                            goto case 0;
+                        case 3:
+                            goto case 1;
+                    }
                     break;
                 case 'I':
+                    switch (position)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            goto case 0;
+                        case 3:
+                            goto case 1;
+                    }
+                    break;
+                case 'L':
+                    switch (position)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                    }
                     break;
                 case 'J':
+                    switch (position)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                    }
                     break;
             }
         }
