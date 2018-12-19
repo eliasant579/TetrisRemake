@@ -47,7 +47,7 @@ namespace Tetris2
                 }
             }
 
-            Shape(squareOrigin[startPosition.X, startPosition.Y], 't', pos);
+            Shape(squareOrigin[startPosition.X, startPosition.Y], 'T', pos);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -55,31 +55,33 @@ namespace Tetris2
             if (e.KeyCode == Keys.Down)
             {
                 startPosition.Y++;
-                Shape(squareOrigin[startPosition.X, startPosition.Y], 't', pos);
+                Shape(squareOrigin[startPosition.X, startPosition.Y], 'T', pos);
             }
             else if (e.KeyCode == Keys.Left)
             {
                 startPosition.X--;
-                Shape(squareOrigin[startPosition.X, startPosition.Y], 't', pos);
+                Shape(squareOrigin[startPosition.X, startPosition.Y], 'T', pos);
             }
             else if (e.KeyCode == Keys.Right)
             {
                 startPosition.X++;
-                Shape(squareOrigin[startPosition.X, startPosition.Y], 't', pos);
+                Shape(squareOrigin[startPosition.X, startPosition.Y], 'T', pos);
             }
             else if (e.KeyCode == Keys.Up)
             {
                 pos = (pos + 1) % 4;
-                Shape(squareOrigin[startPosition.X, startPosition.Y], 't', pos);
+                Shape(squareOrigin[startPosition.X, startPosition.Y], 'S', pos);
             }
         }
 
         public void Shape(PointF origin, char shape, int position)
         {
             TestGrid();
-            if (shape == 't')
+            switch (shape)
             {
                 //first check for collisions
+
+                case 'T':
                 switch (position)
                 {
                     case 0:
@@ -107,6 +109,34 @@ namespace Tetris2
                         grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
                         break;
                 }
+                    break;
+                case 'S':
+                    switch (position)
+                    {
+                        case 0:
+                            grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y + 21, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X - 21, origin.Y + 21, 20, 20);
+                            break;
+                        case 1:
+                            grid.FillRectangle(tBrush, origin.X, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X, origin.Y - 21, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X + 21, origin.Y, 20, 20);
+                            grid.FillRectangle(tBrush, origin.X + 21, origin.Y + 21, 20, 20);
+                            break;
+                        case 2:
+                            goto case 0;
+                        case 3:
+                            goto case 1;
+                    }
+                    break;
+                case 'Z':
+                    break;
+                case 'L':
+                    break;
+                case 'I':
+                    break;
             }
         }
 
